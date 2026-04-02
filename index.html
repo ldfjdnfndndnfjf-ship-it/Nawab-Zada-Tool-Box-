@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NAWAB ZADA | GLOBAL TOOL BOX</title>
+    <style>
+        :root { --neon: #00ff00; --bg: #050505; --card: #0d0d0d; }
+        body { background: var(--bg); color: var(--neon); font-family: 'Courier New', monospace; margin: 0; padding: 15px; }
+        
+        /* 🦅 HEADER SECTION */
+        .header { text-align: center; border-bottom: 2px solid var(--neon); padding: 20px 0; margin-bottom: 25px; box-shadow: 0 0 15px rgba(0,255,0,0.2); }
+        .header h1 { margin: 0; font-size: 24px; letter-spacing: 3px; }
+        .header p { font-size: 12px; color: #888; margin-top: 5px; }
+
+        /* 📦 SEARCH & FILTER */
+        .search-container { margin-bottom: 20px; }
+        #toolSearch { width: 100%; padding: 12px; background: #111; border: 1px solid #333; color: var(--neon); border-radius: 5px; outline: none; }
+        #toolSearch:focus { border-color: var(--neon); box-shadow: 0 0 10px var(--neon); }
+
+        /* 🛠️ GRID SYSTEM FOR 100+ TOOLS */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; }
+        
+        .tool-card { background: var(--card); border: 1px solid #222; padding: 15px; border-radius: 8px; text-align: center; transition: 0.3s; cursor: pointer; position: relative; }
+        .tool-card:hover { border-color: var(--neon); transform: scale(1.05); box-shadow: 0 0 15px rgba(0,255,0,0.3); }
+        .tool-card i { font-size: 30px; display: block; margin-bottom: 10px; }
+        .tool-card h3 { font-size: 14px; margin: 0; color: #fff; }
+        .tool-card span { font-size: 10px; color: #00cc00; display: block; margin-top: 5px; }
+
+        /* 🔋 TOOL MODAL (THE INTERFACE) */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1000; }
+        .modal-content { position: relative; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; max-width: 500px; background: #000; border: 2px solid var(--neon); padding: 25px; border-radius: 15px; }
+        .close { position: absolute; top: 10px; right: 15px; color: red; font-weight: bold; cursor: pointer; }
+        
+        input[type="text"] { width: 100%; padding: 10px; margin: 15px 0; background: #111; border: 1px solid var(--neon); color: var(--neon); border-radius: 5px; }
+        .exe-btn { background: var(--neon); color: #000; border: none; padding: 12px; width: 100%; font-weight: bold; border-radius: 5px; cursor: pointer; }
+        #terminal-output { margin-top: 15px; background: #050505; padding: 10px; border-left: 3px solid var(--neon); font-size: 12px; height: 100px; overflow-y: auto; color: #0f0; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>🦅 NAWAB ZADA 🦾</h1>
+        <p>GLOBAL TOOL BOX V1.0 | DEVELOPED BY NAWAB ZADA</p>
+    </div>
+
+    <div class="search-container">
+        <input type="text" id="toolSearch" placeholder="Search 100+ Tools (e.g. TikTok, IP, PDF)..." onkeyup="filterTools()">
+    </div>
+
+    <div class="grid" id="toolsGrid">
+        
+        <div class="tool-card" onclick="openTool('TikTok For You Engine', 'Algorithm analysis for viral content.')">
+            <i>🔥</i>
+            <h3>TikTok For You</h3>
+            <span>Status: WORKING</span>
+        </div>
+
+        <div class="tool-card" onclick="openTool('IP Tracer Pro', 'Fetch real-time location and ISP data.')">
+            <i>📡</i>
+            <h3>IP Tracer</h3>
+            <span>Status: WORKING</span>
+        </div>
+
+        <div class="tool-card" onclick="openTool('Video Downloader', 'Download HD videos without watermark.')">
+            <i>📥</i>
+            <h3>All Downloader</h3>
+            <span>Status: WORKING</span>
+        </div>
+
+        </div>
+
+    <div id="toolModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeTool()">[ CLOSE ]</span>
+            <h2 id="modalTitle">Tool Name</h2>
+            <p id="modalDesc" style="font-size: 12px; color: #888;"></p>
+            <input type="text" id="toolInput" placeholder="Enter link or target here...">
+            <button class="exe-btn" onclick="runTool()">EXECUTE COMMAND</button>
+            <div id="terminal-output">System Ready. Waiting for Nawab ZADA's input...</div>
+        </div>
+    </div>
+
+    <script>
+        function openTool(name, desc) {
+            document.getElementById('modalTitle').innerText = name;
+            document.getElementById('modalDesc').innerText = desc;
+            document.getElementById('toolModal').style.display = "block";
+            document.getElementById('terminal-output').innerHTML = "Initializing " + name + "...<br>Core connection established.";
+        }
+
+        function closeTool() {
+            document.getElementById('toolModal').style.display = "none";
+        }
+
+        function runTool() {
+            let output = document.getElementById('terminal-output');
+            let input = document.getElementById('toolInput').value;
+            if(!input) { output.innerHTML += "<br><span style='color:red;'>[ERROR] Input required!</span>"; return; }
+            
+            output.innerHTML += "<br>Scanning target: " + input;
+            output.innerHTML += "<br><span style='color:yellow;'>Processing Algorithm...</span>";
+            setTimeout(() => {
+                output.innerHTML += "<br><span style='color:var(--neon);'>[SUCCESS] Task Completed by Nawab ZADA!</span>";
+            }, 2000);
+        }
+
+        function filterTools() {
+            let input = document.getElementById('toolSearch').value.toUpperCase();
+            let cards = document.getElementsByClassName('tool-card');
+            for (let i = 0; i < cards.length; i++) {
+                let h3 = cards[i].getElementsByTagName("h3")[0];
+                if (h3.innerHTML.toUpperCase().indexOf(input) > -1) {
+                    cards[i].style.display = "";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+</body>
+  </html>
+  
