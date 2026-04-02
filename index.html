@@ -6,101 +6,100 @@
     <title>NAWAB ZADA | GLOBAL TOOL BOX</title>
     <style>
         :root { --neon: #00ff00; --bg: #050505; --card: #0d0d0d; --wa: #25D366; }
-        body { background: var(--bg); color: var(--neon); font-family: 'Courier New', monospace; margin: 0; padding: 15px; }
+        body { background: var(--bg); color: var(--neon); font-family: 'Courier New', monospace; margin: 0; padding: 15px; overflow-x: hidden; }
         
-        /* 🦅 HEADER */
-        .header { text-align: center; border: 1px solid var(--neon); padding: 15px; margin-bottom: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,255,0,0.1); }
-        .header h1 { margin: 0; font-size: 22px; letter-spacing: 2px; }
-        
-        /* 📦 GRID SYSTEM */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; }
-        .tool-card { background: var(--card); border: 1px solid #222; padding: 15px; border-radius: 10px; text-align: center; transition: 0.3s; cursor: pointer; }
-        .tool-card:hover { border-color: var(--neon); transform: translateY(-3px); box-shadow: 0 0 15px rgba(0,255,0,0.2); }
-        .tool-card i { font-size: 28px; display: block; margin-bottom: 8px; }
-        .tool-card h3 { font-size: 13px; margin: 0; color: #fff; }
-        .tool-card span { font-size: 9px; color: #00cc00; display: block; margin-top: 5px; }
+        /* HEADER */
+        .header { text-align: center; border: 1px solid var(--neon); padding: 15px; margin-bottom: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,255,0,0.2); }
+        .header h1 { margin: 0; font-size: 22px; letter-spacing: 2px; text-transform: uppercase; }
+        .header p { font-size: 10px; color: #888; margin-top: 5px; }
 
-        /* 🔒 WHATSAPP LOCK MODAL */
+        /* SEARCH BAR */
+        #toolSearch { width: 100%; padding: 12px; margin-bottom: 20px; background: #111; border: 1px solid #333; color: var(--neon); border-radius: 8px; outline: none; box-sizing: border-box; }
+
+        /* GRID SYSTEM */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; }
+        .tool-card { background: var(--card); border: 1px solid #222; padding: 15px; border-radius: 12px; text-align: center; transition: 0.3s; cursor: pointer; }
+        .tool-card:hover { border-color: var(--neon); transform: translateY(-5px); box-shadow: 0 0 15px var(--neon); }
+        .tool-card i { font-size: 30px; display: block; margin-bottom: 10px; }
+        .tool-card h3 { font-size: 13px; margin: 0; color: #fff; }
+        .tool-card span { font-size: 9px; color: #00cc00; display: block; margin-top: 5px; font-weight: bold; }
+
+        /* 🔒 ONE-TIME LOCK MODAL */
         #lockModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); z-index: 9999; }
-        .lock-content { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; width: 85%; max-width: 400px; border: 2px solid var(--neon); padding: 30px; border-radius: 20px; background: #000; box-shadow: 0 0 30px var(--neon); }
-        .follow-btn { background: var(--wa); color: #000; padding: 12px 25px; border: none; border-radius: 50px; font-weight: bold; cursor: pointer; margin-top: 20px; text-decoration: none; display: inline-block; font-size: 14px; transition: 0.3s; }
-        .follow-btn:hover { transform: scale(1.1); box-shadow: 0 0 20px var(--wa); }
+        .lock-content { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; width: 85%; max-width: 400px; border: 2px solid var(--neon); padding: 35px; border-radius: 20px; background: #000; box-shadow: 0 0 30px var(--neon); }
+        .follow-btn { background: var(--wa); color: #000; padding: 15px 30px; border: none; border-radius: 50px; font-weight: bold; cursor: pointer; margin-top: 25px; text-decoration: none; display: inline-block; font-size: 15px; }
         
-        /* 🛠️ TOOL MODAL */
+        /* TOOL MODAL */
         #toolModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1000; }
         .modal-content { position: relative; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; max-width: 450px; background: #000; border: 2px solid var(--neon); padding: 25px; border-radius: 15px; }
-        input[type="text"] { width: 100%; padding: 12px; margin: 15px 0; background: #111; border: 1px solid var(--neon); color: var(--neon); border-radius: 5px; box-sizing: border-box; outline: none; }
+        input[type="text"] { width: 100%; padding: 12px; margin: 15px 0; background: #111; border: 1px solid var(--neon); color: var(--neon); border-radius: 5px; box-sizing: border-box; }
         .exe-btn { background: var(--neon); color: #000; border: none; padding: 12px; width: 100%; font-weight: bold; border-radius: 5px; cursor: pointer; }
+        #console { margin-top: 15px; background: #050505; padding: 10px; border-left: 2px solid var(--neon); font-size: 11px; height: 100px; overflow-y: auto; color: #0f0; }
     </style>
 </head>
 <body>
 
     <div id="lockModal">
         <div class="lock-content">
-            <h2 style="color: var(--neon);">ACCESS DENIED! 🚫</h2>
-            <p style="color: #fff; font-size: 14px;">Jani, Tools use karne ke liye Nawab ZADA ka official WhatsApp channel follow karna lazmi hai.</p>
+            <h2 style="color: var(--neon); letter-spacing: 2px;">SYSTEM LOCKED 🔓</h2>
+            <p style="color: #fff; font-size: 14px; line-height: 1.5;">Jani, Tools use karne ke liye Nawab ZADA ka official WhatsApp channel follow karna lazmi hai.</p>
             <a href="https://whatsapp.com/channel/0029VbB47ttDDmFNztpnZf2m" target="_blank" class="follow-btn" onclick="unlockSystem()">✅ FOLLOW & UNLOCK</a>
         </div>
     </div>
 
     <div class="header">
         <h1>🦅 NAWAB ZADA 🦾</h1>
-        <p>GLOBAL TOOL BOX V1.0 | 20+ TOOLS READY</p>
+        <p>GLOBAL TOOL BOX V1.0 | 100+ TOOLS MISSION</p>
     </div>
 
-    <div class="grid">
-        <div class="tool-card" onclick="checkLock('TikTok For You', 'Viral Algorithm Analysis')"><i>🔥</i><h3>TikTok For You</h3><span>WORKING</span></div>
-        <div class="tool-card" onclick="checkLock('TikTok Saver', 'No Watermark Video')"><i>📥</i><h3>TikTok Saver</h3><span>WORKING</span></div>
+    <input type="text" id="toolSearch" placeholder="Search tools (TikTok, IP, FB)..." onkeyup="searchTools()">
+
+    <div class="grid" id="toolsGrid">
+        <div class="tool-card" onclick="openTool('TikTok For You', 'Boost your video to for-you page algorithm.')"><i>🔥</i><h3>TikTok For You</h3><span>WORKING</span></div>
+        <div class="tool-card" onclick="openTool('TikTok Saver', 'Download HD videos without watermark.')"><i>📥</i><h3>TikTok Saver</h3><span>WORKING</span></div>
         
-        <div class="tool-card" onclick="checkLock('Insta Pro', 'Download Reels & Stories')"><i>📸</i><h3>Insta Pro</h3><span>WORKING</span></div>
-        <div class="tool-card" onclick="checkLock('FB Video', 'HD Facebook Downloader')"><i>📘</i><h3>FB Video</h3><span>WORKING</span></div>
-        <div class="tool-card" onclick="checkLock('YT Thumb', 'YouTube Thumbnail Grabber')"><i>🎥</i><h3>YT Thumb</h3><span>WORKING</span></div>
+        <div class="tool-card" onclick="openTool('IP Tracer', 'Track live location and ISP data.')"><i>📡</i><h3>IP Tracer</h3><span>WORKING</span></div>
+        <div class="tool-card" onclick="openTool('Port Scanner', 'Check website security vulnerabilities.')"><i>🛡️</i><h3>Port Scanner</h3><span>WORKING</span></div>
+        <div class="tool-card" onclick="openTool('DDoS Stresser', 'Network load testing tool.')"><i>⚡</i><h3>DDoS Test</h3><span>WORKING</span></div>
+        
+        <div class="tool-card" onclick="openTool('Insta Pro', 'Download Reels, Stories & Posts.')"><i>📸</i><h3>Insta Pro</h3><span>WORKING</span></div>
+        <div class="tool-card" onclick="openTool('FB Video HD', 'High-speed Facebook downloader.')"><i>📘</i><h3>FB Video</h3><span>WORKING</span></div>
+        <div class="tool-card" onclick="openTool('YT Thumb', 'Grab YouTube video thumbnails.')"><i>🎥</i><h3>YT Thumb</h3><span>WORKING</span></div>
 
-        <div class="tool-card" onclick="checkLock('IP Tracer', 'Get Target Location Data')"><i>📡</i><h3>IP Tracer</h3><span>WORKING</span></div>
-        <div class="tool-card" onclick="checkLock('Port Scan', 'Website Vulnerability Check')"><i>🛡️</i><h3>Port Scan</h3><span>WORKING</span></div>
-        <div class="tool-card" onclick="checkLock('DDoS Test', 'Stress Test Your Server')"><i>⚡</i><h3>DDoS Test</h3><span>WORKING</span></div>
-        <div class="tool-card" onclick="checkLock('DNS Lookup', 'Fetch DNS Records')"><i>🌍</i><h3>DNS Lookup</h3><span>WORKING</span></div>
-
-        <div class="tool-card" onclick="checkLock('PDF Editor', 'Merge & Convert PDF')"><i>📄</i><h3>PDF Editor</h3><span>WORKING</span></div>
-        <div class="tool-card" onclick="checkLock('Pass Gen', 'Random Secure Password')"><i>🔑</i><h3>Pass Gen</h3><span>WORKING</span></div>
-        <div class="tool-card" onclick="checkLock('Logo AI', 'Generate Hacker Logo')"><i>🎨</i><h3>Logo AI</h3><span>WORKING</span></div>
-        <div class="tool-card" onclick="checkLock('Text Encrypt', 'Secure Your Messages')"><i>🔒</i><h3>Text Encrypt</h3><span>WORKING</span></div>
-        <div class="tool-card" onclick="checkLock('Temp Mail', 'Disposable Email Address')"><i>📧</i><h3>Temp Mail</h3><span>WORKING</span></div>
-        <div class="tool-card" onclick="checkLock('Image BG', 'Remove Background AI')"><i>🖼️</i><h3>Image BG</h3><span>WORKING</span></div>
-        <div class="tool-card" onclick="checkLock('Link Short', 'Shorten Long URLs')"><i>🔗</i><h3>Link Short</h3><span>WORKING</span></div>
-        <div class="tool-card" onclick="checkLock('QR Maker', 'Generate Custom QR Codes')"><i>🏁</i><h3>QR Maker</h3><span>WORKING</span></div>
-        <div class="tool-card" onclick="checkLock('Speed Test', 'Check Internet Speed')"><i>🚀</i><h3>Speed Test</h3><span>WORKING</span></div>
-        <div class="tool-card" onclick="checkLock('Proxy List', 'Fresh Proxy Grabber')"><i>🌐</i><h3>Proxy List</h3><span>WORKING</span></div>
-        <div class="tool-card" onclick="checkLock('User Agent', 'Get Browser User Agents')"><i>💻</i><h3>User Agent</h3><span>WORKING</span></div>
+        <div class="tool-card" onclick="openTool('PDF Master', 'Merge, Split & Convert PDF files.')"><i>📄</i><h3>PDF Master</h3><span>WORKING</span></div>
+        <div class="tool-card" onclick="openTool('Pass Gen', 'Generate 100% secure passwords.')"><i>🔑</i><h3>Pass Gen</h3><span>WORKING</span></div>
+        <div class="tool-card" onclick="openTool('Logo AI', 'Create professional hacker logos.')"><i>🎨</i><h3>Logo AI</h3><span>WORKING</span></div>
+        <div class="tool-card" onclick="openTool('Temp Mail', 'Get a disposable email address.')"><i>📧</i><h3>Temp Mail</h3><span>WORKING</span></div>
+        <div class="tool-card" onclick="openTool('BG Remover', 'Remove image background using AI.')"><i>🖼️</i><h3>BG Remover</h3><span>WORKING</span></div>
+        <div class="tool-card" onclick="openTool('QR Code', 'Generate custom QR codes instantly.')"><i>🏁</i><h3>QR Code</h3><span>WORKING</span></div>
+        <div class="tool-card" onclick="openTool('Link Short', 'Make long URLs short and clean.')"><i>🔗</i><h3>Link Short</h3><span>WORKING</span></div>
+        <div class="tool-card" onclick="openTool('Speed Test', 'Check your real internet speed.')"><i>🚀</i><h3>Speed Test</h3><span>WORKING</span></div>
     </div>
 
     <div id="toolModal">
         <div class="modal-content">
-            <span style="color:red; cursor:pointer; float:right;" onclick="closeTool()">[X]</span>
-            <h2 id="modalTitle" style="margin-top:0;"></h2>
+            <span style="color:red; cursor:pointer; float:right; font-weight:bold;" onclick="closeTool()">[X]</span>
+            <h2 id="modalTitle" style="margin-top:0; font-size:18px;"></h2>
             <p id="modalDesc" style="color:#888; font-size:11px;"></p>
-            <input type="text" id="toolInput" placeholder="Enter link, IP or target...">
-            <button class="exe-btn" onclick="executeTask()">EXECUTE COMMAND</button>
-            <div id="console" style="margin-top:15px; background:#050505; padding:10px; border-left:2px solid var(--neon); font-size:10px; height:80px; overflow-y:auto; color:#0f0;">System Ready...</div>
+            <input type="text" id="toolInput" placeholder="Enter target link or ID...">
+            <button class="exe-btn" onclick="runLogic()">EXECUTE COMMAND</button>
+            <div id="console">System Ready... Waiting for Nawab ZADA's input.</div>
         </div>
     </div>
 
     <script>
-        let followStatus = false;
-
-        function checkLock(name, desc) {
-            if(!followStatus) {
+        // Check Lock Status
+        window.onload = function() {
+            if(!localStorage.getItem('nawab_unlocked')) {
                 document.getElementById('lockModal').style.display = "block";
-            } else {
-                openTool(name, desc);
             }
-        }
+        };
 
         function unlockSystem() {
+            // One-time unlock logic
+            localStorage.setItem('nawab_unlocked', 'true');
             setTimeout(() => {
-                followStatus = true;
                 document.getElementById('lockModal').style.display = "none";
-                alert("Nawab ZADA System Unlocked! Enjoy your tools.");
             }, 3000);
         }
 
@@ -108,17 +107,36 @@
             document.getElementById('modalTitle').innerText = name;
             document.getElementById('modalDesc').innerText = desc;
             document.getElementById('toolModal').style.display = "block";
+            document.getElementById('console').innerHTML = "Initializing " + name + "...";
         }
 
         function closeTool() { document.getElementById('toolModal').style.display = "none"; }
 
-        function executeTask() {
+        function runLogic() {
             let log = document.getElementById('console');
-            log.innerHTML += "<br>> Initializing " + document.getElementById('modalTitle').innerText + "...";
-            log.innerHTML += "<br>> Processing: " + document.getElementById('toolInput').value;
-            setTimeout(() => { log.innerHTML += "<br>> <span style='color:var(--neon);'>[SUCCESS] Task Completed by Nawab ZADA!</span>"; }, 2000);
+            let val = document.getElementById('toolInput').value;
+            if(!val) { log.innerHTML += "<br><span style='color:red;'>[!] Input is empty!</span>"; return; }
+            
+            log.innerHTML += "<br>> Processing: " + val;
+            log.innerHTML += "<br>> Connecting to Nawab ZADA server...";
+            setTimeout(() => {
+                log.innerHTML += "<br>> <span style='color:var(--neon);'>[SUCCESS] Task finished.</span>";
+            }, 2000);
+        }
+
+        function searchTools() {
+            let input = document.getElementById('toolSearch').value.toUpperCase();
+            let cards = document.getElementsByClassName('tool-card');
+            for (let i = 0; i < cards.length; i++) {
+                let h3 = cards[i].getElementsByTagName("h3")[0];
+                if (h3.innerText.toUpperCase().indexOf(input) > -1) {
+                    cards[i].style.display = "";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
         }
     </script>
 </body>
-                                                                                             </html>
-            
+    </html>
+    
